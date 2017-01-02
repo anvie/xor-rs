@@ -5,3 +5,6 @@ authors = ["Aleksey Kuznetsov <zummenix@gmail.com>"]
 
 [dev-dependencies]
 expectest = { version = "0.6.0", features = [] }
+
+[dependencies]
+rustc-serialize = "0.3"

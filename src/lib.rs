@@ -1,8 +1,9 @@
-
 //! A repeating-key XOR functions.
 //!
 //! This functions might be useful to play with
 //! [the matasano crypto challenges](http://cryptopals.com).
+
+extern crate rustc_serialize as serialize;
 
 #[cfg(test)]
 #[macro_use(expect)]
@@ -99,4 +100,12 @@ mod tests {
         let result = xor_with_byte(source, 23);
         expect!(result).to(be_equal_to([23, 22, 21, 20]));
     }
+}
+
+use serialize::base64::FromBase64;
+
+pub fn decrypt(encrypted:&'static str, encrypt_key:&str) -> String {
+    let decoded = encrypted.from_base64().unwrap();
+    let decrypted = xor(&decoded[..], encrypt_key.as_bytes());
+    String::from_utf8(decrypted).unwrap()
 }
